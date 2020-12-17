@@ -3,6 +3,7 @@ Error log from `init` container
 
 Reproducing issue
 ```bash
+git checkout pv-permission-error
 kubectl create namespace jenkins
 helm install minikube . -n jenkins
 ```
