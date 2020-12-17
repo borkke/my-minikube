@@ -2,13 +2,15 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: jenkins-pv
-  #namespace: management
+  # Original link from the guide had "jenkins-project" for namespace which is probably mistake.
+  # https://raw.githubusercontent.com/jenkins-infra/jenkins.io/master/content/doc/tutorials/kubernetes/installing-jenkins-on-kubernetes/jenkins-volume.yaml
+  namespace: jenkins
 spec:
   storageClassName: jenkins-pv
   accessModes:
     - ReadWriteOnce
   capacity:
-    storage: 20Gi
+    storage: 10Gi
   persistentVolumeReclaimPolicy: Retain
   hostPath:
     path: /data/jenkins-volume/

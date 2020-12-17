@@ -2,31 +2,32 @@ jenkins:
   controller:
     serviceType: NodePort
     nodePort: 32000
-    runAsUser: 0
-    fsGroup: 0
+    JCasC:
+      defaultConfig: true
+      configScripts:
+        welcome-message: |
+          jenkins:
+            systemMessage: Running on Minikube.  This Jenkins is configured and managed 'as code'.
+      securityRealm: |-
+        local:
+          allowsSignup: false
+          enableCaptcha: false
+          users:
+          - id: "${chart-admin-username}"
+            name: "Jenkins Admin"
+            password: "${chart-admin-password}"
+          - id: "borkke"
+            name: "borkke"
+            password: "P@ssword123"
+      authorizationStrategy: |-
+        loggedInUsersCanDoAnything:
+          allowAnonymousRead: false
+  # This fixed the issue but I'm trying not to use root user
+  #   runAsUser: 0
+  #   fsGroup: 0
   persistence:
     storageClass: jenkins-pv
   serviceAccount:
     create: false
     name: jenkins
     annotations: {}
-  JCasC:
-    defaultConfig: true
-    configScripts:
-     welcome-message: |
-       jenkins:
-         systemMessage: Running on Borkke Minikube.  This Jenkins is configured and managed 'as code'.
-    securityRealm: |-
-      local:
-        allowsSignup: false
-        enableCaptcha: false
-        users:
-        - id: "${chart-admin-username}"
-          name: "Jenkins Admin"
-          password: "${chart-admin-password}"
-        - id: "borkke"
-          name: "borkke"
-          password: "P@ssword123"
-    authorizationStrategy: |-
-      loggedInUsersCanDoAnything:
-        allowAnonymousRead: false
