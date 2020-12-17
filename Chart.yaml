@@ -22,5 +22,5 @@ appVersion: 1.16.0
 
 dependencies:
   - name: jenkins
-    version: "3.0.8"
+    version: "3.0.9"
     repository: "https://charts.jenkins.io"
